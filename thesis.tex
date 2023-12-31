@@ -3,26 +3,33 @@
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[dvipdfmx]{color}
 \usepackage[dvipdfmx, bookmarks=true, setpagesize=false]{hyperref}
+\usepackage{subcaption} 
 \usepackage{pxjahyper}
 
 \usepackage{thesis}
 \usepackage{here}
 \usepackage{url}
 
-
 \thesis{修 士 論 文}
 \title{
   \centering
-    \scalebox{1.0}{視覚と行動のかに}\\
-    \vspace{-0.3zh}
-    \scalebox{0.7}{title}
-    \vspace{-0.6zh}
+    % \scalebox{1.0}{視覚と行動のend-to-end学習により経路追従行動を}\\
+    % \scalebox{1.0}{をオンラインで模倣する手法の提案}\\
+    % \scalebox{1.0}{-経路選択機能の追加とシナリオに基づく}\\
+    % \scalebox{1.0}{目的地へのナビゲーション-}\\
+    視覚と行動の end-to-end 学習により経路追従行動をオンラインで模倣する手法の提案\\
+-経路選択機能の追加とシナリオに基づく目的地へのナビゲーション-\\
+A proposal for an online imitation method of path-tracking behavior by end-to-end learning of vision and action\\
+-Adding route selection function and scenario-based navigation to the destination-\\
+    % \vspace{-0.3zh}
+    % \scalebox{0.7}{}
+    % \vspace{-0.6zh}
 }
 \setlength{\textwidth}{\fullwidth}
 \setlength{\evensidemargin}{\oddsidemargin}
 
 \date{2024年 3月提出}
-\vspace{-15.0zh}
+\vspace{-30.0zh}
 \teacher{林原 靖男 教授}
 \vspace{-15.0zh}
 \organization{千葉工業大学 先進工学研究科 未来ロボティクス専攻}
@@ -40,11 +47,12 @@
 %% Main Matter
 \mainmatter{}
 %
-% \include{introduction/main}
+\include{introduction/main}
 %ここにディレクトリのパスを追加していく
-
-% \include{method/main}
-% \include{experiment/main}
+\include{elemental/elemental}
+\include{method/main}
+\include{experiment/main}
+\include{atend/end}
 %% Back Matter
 \backmatter{}
 %
