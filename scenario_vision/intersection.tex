@@ -1,0 +1,68 @@
+\clearpage
+\section{通路分類モジュール}
+\label{sec:intersection}
+通路分類モジュールについて述べる．
+このモジュールは，
+シナリオの「条件」が満たされたかの判定に必要な
+通路の特徴を，カメラ画像を入力として分類する．
+通路分類モジュールの概要を\figref{fig:intersection_abs}に示す.
+モジュールはフレーム数16，画像サイズ64x48の連続した画像データを入力とし，
+通路の特徴を分類した結果を出力する.
+通路の特徴の分類は，島田らの手法に倣い，\figref{fig:class}に示す8つとしている．
+使用するカメラは，経路追従モジュールと同様に，データセットの収集時は3つ，
+学習後は1つである．
+
+% この中で，突き当たりは
+% 行き止まり，角（右），角（左），三叉路（中央）
+% 右手に通路が〜角（右）十字路　三叉路（右）三叉路（中央）
+% 左手に通路が〜角（左）十字路　三叉路（中央）三叉路（左）
+\begin{figure}[htbp]
+    \centering
+     \includegraphics[width=100mm]{images/pdf/intersection_abs.pdf}
+     \caption{Overview of the corridor classification module （Quoted from \cite{haruyama2023}）}
+     \label{fig:intersection_abs}
+\end{figure}
+\begin{figure}[htbp]
+    \centering
+     \includegraphics[width=100mm]{images/pdf/class.pdf}
+     \caption{Types of corridor features （Quoted from \cite{haruyama2023}）}
+     \label{fig:class}
+\end{figure}
+\newpage
+
+ネットワークの構成を\figref{fig:int_net}に示す．
+このネットワークアーキテクチャはDhaivatら\cite{lrcn}が提案するCNNとLSTMを組み合わせた
+IntersectNetに倣って構築した．
+なおCNNアーキテクチャは実時間性の観点からAlexNet\cite{alex}からMovileNetV3-Large\cite{v3}へ変更している．
+
+ネットワークはフレーム数16，画像サイズ64x48の連続したRGB画像データを入力とする．
+画像データは各フレームごとにCNNで処理され，この特徴ベクトルはLSTMへ入力される．
+各LSTMの出力は分類層（全結合層）へ渡される．
+最後に，全ての分類層の出力を融合層へ渡し，融合層は入力の平均を取ることで，
+最終的な分類結果を出力する．
+活性化関数としてReLU，最適化アルゴリズムにはAdam，損失関数としてCrossEntropyLossを使用する．
+\begin{figure}[htbp]
+    \centering
+     \includegraphics[width=120mm]{images/pdf/network-intersect.pdf}
+     \caption{Network of corridor classification module}
+     \label{fig:int_net}
+\end{figure}
+
+\newpage
+次に通路分類モジュールのデータセットの作成について述べる.
+データの作成では，経路追従モジュールの学習と同様に，
+メトリックマップに基づいたルールベース制御器によって経路を走行する.
+その際，フレーム数 16 の連続したカメラ画像と通路の分類ラベルを1組とし，
+0.125秒周期でデータセットへ加える.分類ラベルのアノテーションは，
+\figref{fig:int_net}に示すように，通路の特徴を予めメトリックマップに登録しておくことで，自動的に行う.
+\begin{figure}[htbp]
+    \centering
+     \includegraphics[width=100mm]{images/pdf/map_label.pdf}
+     \caption{Classification labels registered in the metric map Quoted from \cite{haruyama2023}}
+     \label{fig:int_net}
+\end{figure}
+
+\secref{sec:imitation}では不均衡データへの対策として，オーバーサンプリングを行った．
+この通路文類モジュールでは，不均衡データへの対策として，
+データセット内のクラス間のデータ数によって重み付けを行うコストアプローチ\cite{cost}を行う.
+具体的には，損失関数（CrossEntropyLoss）で用いるクラスごとの重みをデータ数を基に調整する．

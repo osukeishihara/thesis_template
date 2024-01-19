@@ -50,3 +50,7 @@
 	\thispagestyle{empty}
 	\clearpage
 }
+%---キャプションの中央揃え---
+\RequirePackage{caption}
+\DeclareCaptionFormat{mycaptionformat}{\centering#1#2#3}
+\captionsetup{format=mycaptionformat, justification=centering, singlelinecheck=off}

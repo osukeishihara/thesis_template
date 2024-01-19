@@ -1,0 +1,29 @@
+\chapter{視覚に基づいて目的地まで自律移動するシステムの構築}
+\label{chap:scenario_vision}
+\chapref{chap:path_select}では岡田らの従来手法に対し，経路選択機能を追加した．
+これにより視覚に基づくナビゲーションにおいて，
+分岐路で目標方向の入力に従った経路を選択して移動できることを確認した．
+本章では，視覚に基づいて通路の特徴を検出し，目標方向を提示する機能を追加する．
+% 目的の分岐路へ到達することを視覚から判断する機能を\secref{sec:intersection}，
+% 分岐路において目標方向を指示する機能を\secref{sec:scenario}で述べる．
+目標方向の提示には島田ら\cite{shimada2020}が提案したトポロジカルマップとシナリオを用いる．
+これにより，カメラ画像とトポロジカルマップから作成されるシナリオに基づいて，
+目的地まで自律移動するシステムを構築する.
+% また，このシステムにより事前に作成したメトリックマップを必要せずに，
+% カメラ画像を入力として目的地まで自律移動できる可能性がある.
+% 構築するシステムでは，人間が作成した「次の角まで直進.左折.」などのシナリオから
+% 指示された道順に従い，カメラ画像に基づいて目的地まで自律移動する.
+% で提案するシステムの概要と一連の内容を述べた後，システムを構成する
+% モジュールについて詳細に述べる．
+%
+%\input{introduction/preface}
+%
+\input{scenario_vision/abs}
+\newpage
+\input{scenario_vision/imitation}
+\newpage
+\input{scenario_vision/intersection}
+\newpage
+\input{scenario_vision/scenario}
+\newpage
+\input{scenario_vision/experiment}

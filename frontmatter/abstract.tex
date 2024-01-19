@@ -3,34 +3,72 @@
 \thispagestyle{empty}
 %
 \begin{center}
-  \scalebox{1.5}{タイトル}\\
+  % \scalebox{1.5}{タイトル}\\
+  \scalebox{1.0}{視覚と行動のend-to-end学習により}\\
+    \vspace{-1.0zh}
+    \scalebox{1.0}{経路追従行動をオンラインで模倣する手法の提案}\\
+    \scalebox{1.0}{-経路選択機能の追加とシナリオに基づく目的地へのナビゲーション-}\\
 \end{center}
-\vspace{1.0zh}
+% \vspace{-1.0zh}
 %
 
 
-キーワード: end-to-end学習 シナリオ ナビゲーション \\
+
 %
-　実世界では，ある特定のセンサが機能しない状況におちいり.ロボットの自律移動が継続できない場合がある.
-この問題に対しては，複数の種類のセンサを用いて自己位置推定する方法や，
-ナビゲーション手段自体を冗長化する方法が考えられる.本研究グループでは，
-冗長化に向けて，
-一般的に用いられる LiDAR と地 図によるナビゲーションを機械学習で模倣することで，
-視覚によるナビゲーションを獲得する方法を提案した.
-一般的な模倣学習が人の挙動を模倣するのに対して，
-提案手法は LiDARと地図によるナビゲーションの出力を模倣するため，
-データセットを収集する手間を省くことができるという特長がある.
-さらに前報 [1][2] では，分岐路で指定した方向 (以後, 目標方向と呼 ぶ) に移動する機能を追加した.これにより，ロボット は Fig.1 のように指示された方向に移動するように，カ メラ画像に基づいて経路を移動する.ただし, 前報まで のシステムは，目標方向をカメラ画像により生成して いなかったため, カメラ画像のみで目的地まで移動する ことはできなかった.
-本稿では，カメラ画像のみで目的地に移動するために，
-カメラ画像から分岐路での目標方向を生成する機能を追加する.
-具体的には，島田ら [3] が提案したトポ ロジカルマップと「条件」
-や「行動」による経路の表 現(以後，シナリオと呼ぶ)をこれまで提案した手法
-へ追加する.これにより，カメラ画像とトポロジカル マップから作成されるシナリオに基づいて，目的地ま で自律移動するシステムを構築する.このシステムに より，事前に作成したメトリックマップを必要せずに，
-カメラ画像を入力として目的地まで自律移動できる可能性がある.
-本システムはカメラ画像のみで目的地まで移動できるという違いがある.
-本稿では，提案するシステムにより目的地まで
-カメラ入力のみで自律移動できるかを，
-実ロボットを用いた実験により検証する.
+% 　実世界では，ある特定のセンサが機能しない状況におちいり.ロボットの自律移動が継続できない場合がある.
+% この問題に対しては，複数の種類のセンサを用いて自己位置推定する方法や，
+% ナビゲーション手段自体を冗長化する方法が考えられる.本研究グループでは，
+% 冗長化に向けて，
+% 一般的に用いられる LiDAR と地 図によるナビゲーションを機械学習で模倣することで，
+% 視覚によるナビゲーションを獲得する方法を提案した.
+% 一般的な模倣学習が人の挙動を模倣するのに対して，
+% 提案手法は LiDARと地図によるナビゲーションの出力を模倣するため，
+% データセットを収集する手間を省くことができるという特長がある.
+% さらに前報 [1][2] では，分岐路で指定した方向 (以後, 目標方向と呼 ぶ) に移動する機能を追加した.これにより，ロボット は Fig.1 のように指示された方向に移動するように，カ メラ画像に基づいて経路を移動する.ただし, 前報まで のシステムは，目標方向をカメラ画像により生成して いなかったため, カメラ画像のみで目的地まで移動する ことはできなかった.
+% 本稿では，カメラ画像のみで目的地に移動するために，
+% カメラ画像から分岐路での目標方向を生成する機能を追加する.
+% 具体的には，島田ら [3] が提案したトポ ロジカルマップと「条件」
+% や「行動」による経路の表 現(以後，シナリオと呼ぶ)をこれまで提案した手法
+% へ追加する.これにより，カメラ画像とトポロジカル マップから作成されるシナリオに基づいて，目的地ま で自律移動するシステムを構築する.このシステムに より，事前に作成したメトリックマップを必要せずに，
+% カメラ画像を入力として目的地まで自律移動できる可能性がある.
+% 本システムはカメラ画像のみで目的地まで移動できるという違いがある.
+% 本稿では，提案するシステムにより目的地まで
+% カメラ入力のみで自律移動できるかを，
+% 実ロボットを用いた実験により検証する.
+自律移動ロボットの多くは，占有格子地図などのメトリックマップに基づくナビゲーションを用いている．
+本研究室ではこれまで，このメトリックマップに基づくナビゲーションの行動を
+視覚を入力として模倣学習することで，視覚に基づくナビゲーションを獲得する手法を提案してきた．
+また，実験により視覚を入力として，ロボットが一定の経路を周回できることを確認している．
+% しかし，獲得した視覚に基づくナビゲーションは，一定の経路を周回を目的としているため，
+% 任意の目的地を与え，動的に経路を変更して目的地まで移動することは困難である．
+この手法では，経路を追従する行動の獲得を目的としており，走行する経路は一定に制限されていた．
+% 任意の目的地を設定し，目的地に向けて動的に経路を選択して走行することはできない．
+任意の目的地に向けて移動するためには，環境中の分岐路の検出，分岐路での適切な進行方向の提示，動的に経路を選択して移動する
+機能が必要であると考えられる．
+
+本論文では，これらの機能を岡田らの従来手法に追加することで，走行する経路を一定の経路から，任意の目的地に向けた経路への拡張を試みた．
+% 目的地に動的に経路を選択して走行するために，
+% 岡田らの従来手法に対し，目的地に向けた経路を設定，分岐路などのランドマークの認識，動的に経路を選択して移動する機能の追加を行った
+% 分岐路で任意の経路を選択して移動する機能，
+% 分岐路に到達したことを視覚から判別する機能，
+% 目的地に向けて分岐路で目標とする経路の情報を指示する機能を追加する．
+% これにより，視覚に基づいて経路を追従して目的地まで自律移動するシステムを構築する．
+はじめに動的に経路を選択して移動する機能を追加した．
+% 分岐路において経路を選択する機能の追加を目的として,
+% 岡田らの従来手法へ目標とする進行方向の情報を加えた.
+検証のため，シミュレータを用いた実験を行い，
+視覚に基づくナビゲーションにおいて，同一の分岐路で，動的に経路を選択して移動する様子を確認した．
+% 学習器とデータセットへ目標とする進行方向の情報を加えた．
+% 実験により，分岐路で指示された経路を選択して走行できることを確認した.
+% 実験では，視覚に基づくナビゲーションにおいて，同一の分岐路であっても目標方向の入力に従い, ロボットが適切に経路を選
+% 択して走行する様子が見られた．
+次に，視覚から分岐路を検出し，目的地に向けた進行方向を提示する機能を追加することで，
+% 視覚から目的の分岐路に到着したことを検出し，経路を指示する機能を追加した．
+視覚に基づいて目的地まで自律移動するシステムを構築した．
+さらに，実ロボットを用いた実験から，構築したシステムにより視覚に基づいて
+経路を追従して目的地へ到達可能であることを確認した．\\
+\vspace{1zh}
+キーワード: end-to-end学習 自律移動ロボット ナビゲーション
 \newpage
 %%
 \chapter*{abstract}
@@ -40,7 +78,23 @@
   \scalebox{1.3}{title}
 \end{center}
 \vspace{1.0zh}
-%
-
-
-keywords: 
+Many autonomous mobile robots use navigation based on metric maps, such as 
+occupancy grid maps. In our laboratory, we have been proposing a method to 
+acquire vision-based navigation by imitating actions of navigation based on these 
+metric maps using vision as input. Furthermore, experiments have confirmed that robots 
+can repeatedly navigate a set course using vision as input. 
+This method aims to acquire actions for following a route, and the 
+routes for navigation were limited to a fixed set. To move towards an 
+arbitrary destination, it is considered necessary to have functions for 
+detecting branch points in the environment, 
+presenting the appropriate direction at these branch points, and dynamically 
+selecting and moving along a route.
+In this paper, we attempt to expand the route for navigation from a fixed 
+course to a route towards an arbitrary destination by adding these functions to 
+the conventional methods of Okada et al. Firstly, we added the function to dynamically 
+select and move along a route. For verification, experiments were conducted using a simulator, 
+and it was confirmed that the system could dynamically select and navigate different routes at the same branch point in vision-based navigation. 
+Next, by adding the function to detect branch points from vision and present the direction towards the destination, we constructed a system capable of 
+autonomous movement to the destination based on vision. Furthermore, experiments using real robots confirmed that the constructed system could follow a 
+route based on vision and reach the destination.
+keywords: end-to-end learning, autonomous mobile robot, navigation
