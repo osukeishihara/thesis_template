@@ -3,9 +3,9 @@
 
 \section{概要}
 本章では，岡田らの従来手法に対して,目標とする進行方向のデータ
-を加えることで,動的に経路を選択して移動する機能の追加を試みる.これにより,視覚に基づくナビゲーション
-において,分岐路で「直進」「左折」などの任意の経路への移動
-が可能となることを目指す.
+を加えることで，動的に経路を選択して移動する機能の追加を試みる．これにより，視覚に基づくナビゲーション
+において，分岐路で「直進」「左折」などの任意の経路への移動
+が可能となることを目指す．
 以後，この動的に経路を選択して移動する機能を「経路選択機能」と呼ぶ
 % \include{path_select/method}
 % \include{path_select/experiment}
@@ -37,8 +37,9 @@
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=130mm]{images/pdf/learning_gamma.pdf}
-     \caption{Path selection and following behavior based on camera images 
-     and target direction by imitation learning （Quoted from \cite{haruyama2023}）}
+     \caption[Path selection and following behavior based on camera images 
+     and target direction by imitation learning]{Path selection and following behavior based on camera images 
+     and target direction by imitation learning（Quoted from \cite{haruyama2023}）}
      \label{fig:path_select_abs}
 \end{figure}
 
@@ -53,7 +54,7 @@ CNNの出力と目標方向を入力とする全結合層で構成されてい�
 損失関数や活性化関数などのパラメータは岡田らの従来手法と同様である．
 
 学習器はRGB画像と，目標方向を入力，ヨー方向の角速度を出力として
-end-to-endで学習する．
+end-to-end学習する．
 つまり，視覚を入力とした行動を．目標方向によって条件付けながら学習する．
 % 目標方向の
 % 継続，直進，左折，右折の4つを
@@ -61,8 +62,9 @@ end-to-endで学習する．
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=130mm]{images/pdf/haru_mech.pdf}
-     \caption{Structure of network with added function of
-     selecting path}
+     \caption[Structure of network with added function of
+     selecting path]{Structure of network with added function of
+     selecting path（Quoted from \cite{haruyama2023}）}
      \label{fig:haru_mech_net}
 \end{figure}
 
@@ -101,18 +103,18 @@ end-to-endで学習する．
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=130mm]{images/pdf/haru_mech_exp.pdf}
-     \caption{Experimental environment of selecting path （Quoted from \cite{haruyama2022}）}
+     \caption[Experimental environment of selecting path]{Experimental environment of selecting path（Quoted from \cite{haruyama2022}）}
      \label{fig:haru_mech_exp}
 \end{figure}
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=130mm]{images/pdf/haru_mech_exp_ab.pdf}
-     \caption{Selecting a path at the T-junction （Quoted from \cite{haruyama2022}）}
+     \caption[Selecting a path at the T-junction]{Selecting a path at the T-junction（Quoted from \cite{haruyama2022}）}
      \label{fig:haru_mech_exp_ab}
 \end{figure}
 \vspace{-1zh}
 \subsubsection{実験方法}
-実験は，\figref{fig:haru_mech_route}に示した経路をaからfの順番で繰り返し走
+実験では，\figref{fig:haru_mech_route}に示した経路をaからfの順番で繰り返し走
 行しながら，模倣学習を行う．目標方向のデータはメトリックマップに基づくルールベース制御器から出力
 され，データセットに加えられる.学習は60000ステップ実行し，
 その後視覚に基づくナビゲーションへ移行する．視覚に基づくナビゲーションにおいても
@@ -123,7 +125,7 @@ aからfまでの経路をロボットに走行させる.ロボットが壁に�
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=130mm]{images/pdf/haru_mech_route.pdf}
-     \caption{Route for experiment of selecting path （Quoted from \cite{haruyama2022}）}
+     \caption[Route for experiment of selecting path]{Route for experiment of selecting path（Quoted from \cite{haruyama2022}）}
      \label{fig:haru_mech_route}
 \end{figure}
 \clearpage
@@ -131,7 +133,7 @@ aからfまでの経路をロボットに走行させる.ロボットが壁に�
 実験結果を\figref{fig:haru_mech_ab_res}に示す．
 図はA，Bそれぞれの分岐路で，ロボットが正しく経路を選択した回数を示している．
 図に示すように，目標方向に従い113/120回適切に経路を選択する様子が
-確認できた．ただし，\tabref{tab:path_res}に示した箇所では,壁に衝突するな
+確認できた．ただし，\tabref{tab:path_res}に示した箇所では，壁に衝突するな
 どして自律移動が継続できない様子も見られた．
 
 \figref{fig:haru_mech_a_select}にA地
@@ -139,13 +141,13 @@ aからfまでの経路をロボットに走行させる.ロボットが壁に�
 走行する様子を示す．このように,同一の分岐路であっても目
 標方向の入力に従い，ロボットが適切に経路を選択して走行
 する様子が見られた．
-この結果から，岡田らの従来手法に対し，任意の目的地に向けた移動に必要な，動的に経路を選択した移動する機能を
+この結果から，岡田らの従来手法に対し，任意の目的地に向けた移動に必要な，動的に経路を選択して移動する機能を
 追加できたと考えられる，
 % \vspace{5zh}
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=130mm]{images/pdf/haru_mech_res.pdf}
-     \caption{Number of times a correct path was selected （Quoted from \cite{haruyama2022}）}
+     \caption[Number of times a correct path was selected]{Number of times a correct path was selected（Quoted from \cite{haruyama2022}）}
      \label{fig:haru_mech_ab_res}
 \end{figure}
 \vspace{-1zh}
@@ -168,6 +170,6 @@ aからfまでの経路をロボットに走行させる.ロボットが壁に�
     \centering
     %  \includegraphics[width=120mm]{images/pdf/haru_mech_a_select.pdf}
      \includegraphics[width=130mm]{images/pdf/zyuziroute-select_a.pdf}
-     \caption{The robot moving while selecting a path （Quoted from \cite{haruyama2022}）}
+     \caption[The robot moving while selecting a path]{The robot moving while selecting a path（Quoted from \cite{haruyama2022}）}
      \label{fig:haru_mech_a_select}
 \end{figure}

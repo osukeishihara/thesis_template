@@ -1,4 +1,5 @@
 \chapter{先行研究}
+\label{chap:prior}
 本論文の議論のベースとなる，岡田らの従来手法と
 島田らが提案したトポロジカルマップの形式，単語の組み合わせで経路を表現したシナリオについて述べる
 
@@ -10,7 +11,7 @@
 これにより，視覚に基づくナビゲーションを獲得できる．
 手法に基づいて構築されたシステムを\figref{fig:okada_sys}に示す．
 
-まずはじめに，学習器の訓練を行う．
+まずはじめに学習器の訓練を行う．
 学習器の訓練時，LiDARやオドメトリを入力とするメトリックマップに基づく
 ルールベース制御器を用いて，設定した経路を追従する．
 その際，ロボットに取り付けた，カメラから得たRGB画像とルールベース制御器が出力する
@@ -19,7 +20,7 @@
 end-to-end学習する．
 このデータセットへのデータの追加から学習までの1連の流れを1ステップとしている．
 カメラ画像の収集には，3つのカメラを用いる．
-左右のカメラ画像に対するヨー方向の角速度は,経路に戻るようなオフセット（\(\pm 0.2\)rad/s）を加える．
+左右のカメラ画像に対するヨー方向の角速度は，経路に戻るようなオフセット（\(\pm 0.2\)rad/s）を加える．
 
 学習器の訓練後は，学習器へ中央のカメラから得たRGB画像を入力し，出力されるヨー方向の角速度を用いて経路を追従する．
 この時，並進速度は0.2m/sの一定の値を用いる．
@@ -27,7 +28,7 @@ end-to-end学習する．
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=110mm]{images/pdf/okada_method_sys.pdf}
-     \caption{Structure of the Okada and others proposed system （Quoted from\cite{okada2020}）}
+     \caption[Structure of the Okada and others proposed system]{Structure of the Okada and others proposed system（Quoted from\cite{okada2020}）}
      \label{fig:okada_sys}
 \end{figure}
 \clearpage
@@ -39,31 +40,33 @@ end-to-end学習する．
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=100mm]{images/pdf/robo_action.pdf}
-     \caption{Rule-based actions
-     apart from the robot's actions Quoted from\cite{okada2020}}
+     \caption[Rule-based actions
+     apart from the robot's actions]{Rule-based actions
+     apart from the robot's actions（Quoted from\cite{okada2020}）}
      \label{fig:robo_ac}
 \end{figure}
 
 \figref{fig:okada_net}
 に岡田らの従来手法における学習器のネットワーク構造を示す．
-ネットワークは,入力層 1,畳み込み層 3,全結合層 2,出力層 1 の全7層で構成される.
+ネットワークは，入力層 1，畳み込み層 3，全結合層 2，出力層 1 の全7層で構成される．
 活性化関数としてReLU\cite{relu}，最適化アルゴリズムにAdam\cite{adam}，
-損失関数としてはSoftmax-cross-entropyを用いる．
+損失関数としてSoftmax-cross-entropyを用いる．
 学習器は入力を64x48のRGB画像データ，出力をロボットのヨー方向の角速度として
 end-to-end学習する．
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=100mm]{images/pdf/okada_network.pdf}
-     \caption{Structure of the network used in the method of Okada and others. （Quoted from \cite{okada2020}）}
+     \caption[Structure of the network used in the method of Okada and others]{Structure of the network used in the method of Okada and others（Quoted from \cite{okada2020}）}
      \label{fig:okada_net}
 \end{figure}
 
 \clearpage
 \section{トポロジカルマップとシナリオ}
-\label{sec:shimada_topo}
+\label{sec:shimada_topo_sce}
 ここでは，分岐路で適切な進行方向を提示する機能のベースとなる，
 島田ら\cite{shimada2020}が提案したトポロジカルマップの形式とシナリオについて述べる．
 \subsection{トポロジカルマップ}
+% \label{subsec:shimada_topo}
 トポロジカルマップは，環境中のランドマークなどの
 特徴的な箇所（ノード）とその繋がり（エッジ）によって
 環境を表現したマップである．
@@ -86,21 +89,23 @@ end-to-end学習する．
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=90mm]{images/pdf/topo.pdf}
-     \caption{Topological map format proposed by Shimada and others （Quoted from\cite{shimada2020}）}
+     \caption[Topological map format proposed by Shimada and others]{Topological map format proposed by Shimada and others（Quoted from\cite{shimada2020}）}
      \label{fig:topo}
 \end{figure}
 \clearpage
 \subsection{シナリオ}
+
 シナリオはトポロジカルマップ上での，目的地までの経路を単語の組み合わせで表現したものである．
 具体的には，「次の角」や「突き当たりまで」のような「条件」と「直進」,「右折」のような「行動」の組み合わせにより作成される.
-このシナリオの形式は，\secref{sec:shimada_topo}のトポロジカルマップと同様に人の道案内に関するアンケートを実施し
+このシナリオの形式は，前述のトポロジカルマップと同様に人の道案内に関するアンケートを実施し
 ，その結果に基づいて決定された．
 アンケートでは，人は「条件」と「行動」を組み合わせて道案内をしていることが明らかになっている．
 例として，\figref{fig:scenario01}に示す経路をシナリオで表現すると，「3番目の三叉路まで直進．停止」となる.
+
 \vspace{3zh}
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=110mm]{images/pdf/scenario/scenario01.pdf}
-     \caption{Example scenarios （Quoted from \cite{haruyama2023}）}
+     \caption[Example scenarios]{Example scenarios（Quoted from \cite{haruyama2023}）}
      \label{fig:scenario01}
 \end{figure}

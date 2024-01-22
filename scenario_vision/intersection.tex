@@ -19,13 +19,13 @@
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=100mm]{images/pdf/intersection_abs.pdf}
-     \caption{Overview of the corridor classification module （Quoted from \cite{haruyama2023}）}
+     \caption[Overview of the corridor classification module]{Overview of the corridor classification module（Quoted from \cite{haruyama2023}）}
      \label{fig:intersection_abs}
 \end{figure}
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=100mm]{images/pdf/class.pdf}
-     \caption{Types of corridor features （Quoted from \cite{haruyama2023}）}
+     \caption[Types of corridor features]{Types of corridor features（Quoted from \cite{haruyama2023}）}
      \label{fig:class}
 \end{figure}
 \newpage
@@ -33,12 +33,12 @@
 ネットワークの構成を\figref{fig:int_net}に示す．
 このネットワークアーキテクチャはDhaivatら\cite{lrcn}が提案するCNNとLSTMを組み合わせた
 IntersectNetに倣って構築した．
-なおCNNアーキテクチャは実時間性の観点からAlexNet\cite{alex}からMovileNetV3-Large\cite{v3}へ変更している．
+なおCNNアーキテクチャは実時間性の観点からAlexNet\cite{alex}からMobileNetV3-Large\cite{v3}へ変更している．
 
 ネットワークはフレーム数16，画像サイズ64x48の連続したRGB画像データを入力とする．
 画像データは各フレームごとにCNNで処理され，この特徴ベクトルはLSTMへ入力される．
 各LSTMの出力は分類層（全結合層）へ渡される．
-最後に，全ての分類層の出力を融合層へ渡し，融合層は入力の平均を取ることで，
+最後に，すべての分類層の出力を融合層へ渡し，融合層は入力の平均を取ることで，
 最終的な分類結果を出力する．
 活性化関数としてReLU，最適化アルゴリズムにはAdam，損失関数としてCrossEntropyLossを使用する．
 \begin{figure}[htbp]
@@ -58,7 +58,7 @@ IntersectNetに倣って構築した．
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=100mm]{images/pdf/map_label.pdf}
-     \caption{Classification labels registered in the metric map Quoted from \cite{haruyama2023}}
+     \caption[Classification labels registered in the metric map]{Classification labels registered in the metric map（Quoted from \cite{haruyama2023}）}
      \label{fig:int_net}
 \end{figure}
 

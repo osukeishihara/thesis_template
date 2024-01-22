@@ -1,9 +1,10 @@
 \section{実ロボットを用いた実験}
 実ロボットを用いて, 構築したシステムにより, 
 ロボットが目的地へ到達可能であるか検証する.
+
 \subsection{実験装置}
-実験で用いるロボットを\figref{fig:gamma}に示す．
-ロボットはicart-mini\cite{icart}をベースに開発したロボットを用いる．
+実験には\figref{fig:gamma}に示すicart-mini\cite{icart}を
+ベースに開発したロボットを用いる．
 センサとして，単眼のウェブカメラ(サンワサプライ株式会社 CMS-V43BK)を3つ，
 2D-LiDAR(北陽電機 UTM-30LX)を1つ，左右のモータにそれぞれパルス付きエンコーダを搭載している．
 制御用の PC には GALLERIA GCR2070RGF-QC-Gを使用している.
@@ -12,7 +13,7 @@ orne\_navigation\cite{orne_nav}を使用する
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=80mm]{images/pdf/gamma_sensor.pdf}
-     \caption{Experimental setup （Quoted from \cite{haruyama2023}）}\label{fig:gamma}
+     \caption[Experimental setup]{Experimental setup（Quoted from \cite{haruyama2023}）}\label{fig:gamma}
 \end{figure}
 
 \newpage
@@ -24,26 +25,26 @@ orne\_navigation\cite{orne_nav}を使用する
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=100mm]{images/pdf/cit3f.pdf}
-     \caption{Experimental environment （Quoted from \cite{haruyama2023}）}\label{fig:cit3f}
+     \caption[Experimental environment]{Experimental environment（Quoted from \cite{haruyama2023}）}\label{fig:cit3f}
 \end{figure}
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=130mm]{images/pdf/si_route.pdf}
-     \caption{Route used for learning （Quoted from \cite{haruyama2023}）}\label{fig:newroute}
+     \caption[Route used for learning]{Route used for learning（Quoted from \cite{haruyama2023}）}\label{fig:newroute}
 \end{figure}
 
 
 \subsubsection{シナリオの選定}
 実験では島田らが用いた50例のシナリオの中から，
 \figref{fig:scenario_exp}に示す7例を用いた．
-このシナリオは以下の3つの基準に従って，選定した．
+このシナリオは以下の3つの基準に従って選定した．
 % \ref{fig:cit3f}の場所を対象としていること.
 % ロボットが移動困難な\ref{fig:semai}の箇所のような狭い通路が含まれていないこと.
 % その場で「後ろを向く」など経路追従モジュールができない行動が含まれていないことである.
 \begin{enumerate}
     \item [1）] 2号館3階の廊下において，\figref{fig:cit3f}の場所を対象としていること.
-    \item [2）] ロボットが移動困難な\figref{fig:semai}の箇所のような狭い通路が含まれていないこと
-    \item [3）] その場で「後ろを向く」など経路追従モジュールができない行動が含まれていないこと
+    \item [2）] ロボットが移動困難な\figref{fig:semai}の箇所のような狭い通路が含まれていないこと．
+    \item [3）] その場で「後ろを向く」など経路追従モジュールができない行動が含まれていないこと．
 \end{enumerate}
 
 \begin{figure*}[htbp]
@@ -91,7 +92,7 @@ orne\_navigation\cite{orne_nav}を使用する
             \label{imagess}
         \end{minipage}
     \end{tabular}
-    \caption{Scenarios used in the experiment （Quoted from \cite{haruyama2023}）}\label{fig:scenario_exp}
+    \caption[Scenarios used in the experiment]{Scenarios used in the experiment（Quoted from \cite{haruyama2023}）}\label{fig:scenario_exp}
 \end{figure*}
 
 \begin{figure}[htbp]
@@ -107,9 +108,9 @@ orne\_navigation\cite{orne_nav}を使用する
 3周し，データセットを収集する．
 収集したデータは，1，2周目を訓練データとし，
 3周目をテストデータとする.それぞれのデータ数は，
-訓練データ5781，テストデータ2902であり．2つのデータ内のクラス間のデータ数は\tabref{tab:dataset}である．
+訓練データ5781，テストデータ2902である．
+これら2つのデータ内のクラス間のデータ数を\tabref{tab:dataset}に示す．
 訓練は損失関数の重みを\tabref{tab:cost}，バッチサイズを32として，30epoch行った.
-
 訓練後，テストデータに対する通路分類モジュールの正解率{(Accuracy)}，適合率{(Precision)}を計算する．
 \begin{table}[htbp]
     \centering
@@ -151,12 +152,12 @@ orne\_navigation\cite{orne_nav}を使用する
 \subsubsection{経路追従モジュールの訓練}
 次に経路追従モジュールの訓練を行う.
 通路分類モジュールの訓練と同様の経路を，
-オンラインで 模倣学習しながら1周走行する.
-その際のステップ数は12000であった.
+オンラインで 模倣学習しながら1周走行する．
+その際のステップ数は12000であった．
 
 2つのモジュールを訓練後，シナリオを1例ずつ入力して，
-ロボットの挙動を観察する.実験では，ロボットをシナリオの
-スタート地点に移動して，自律移動を開始する.
+ロボットの挙動を観察する．実験では，ロボットをシナリオの
+スタート地点に移動して，自律移動を開始する．
 
 \vspace{5zh}
 
@@ -196,7 +197,7 @@ torcheval\cite{torcheval}を用いた．
 
 \figref{fig:exp_path}に\figref{fig:scenario21}のシナリオを入力した実験の様子を示す．
 キャプションは実行中の部分シナリオと，ロボットが現在位置する通路の特徴である．
-図に示すように入力されたシナリオの道順に従い, 三叉路などの分岐路
+図に示すように入力されたシナリオの道順に従い,，三叉路などの分岐路
 で適切に経路を選択して自律移動する様子が見られた.
 結果として，7例すべてでロボットが, 目的地へ到達した．
 以上の結果から, 構築したカメラ画像とシナリオに基づいて, 
@@ -242,5 +243,5 @@ torcheval\cite{torcheval}を用いた．
         \end{minipage}
     \end{tabular}
 
-    \caption{An example of the robot applied the constructed system （Quoted from \cite{haruyama2023}）}\label{fig:exp_path}
+    \caption[An example of the robot applied the constructed system]{An example of the robot applied the constructed system（Quoted from \cite{haruyama2023}）}\label{fig:exp_path}
 \end{figure*}

@@ -9,10 +9,10 @@
 % 自己位置推定，経路計画するナビゲーションにより目的地まで自律移動している．
 例として，つくば市内の公道で行われる技術チャレンジである
 つくばチャレンジにおいて，
-2019年度の原らの技術調査\cite{hara2019}では，参加した57チームの中で，50のチームが
+原らが行なった技術調査\cite{hara2019}によると，参加した57チームの中で，50のチームが
 メトリックマップに基づくナビゲーションを用いている．
-また，多くのチームがメトリックマップに基づくナビゲーションに，
-LiDARやIMUなどのセンサ,ホイールエンコーダから算出したオドメトリを利用している．
+また，これらのチームの多くは，メトリックマップに基づくナビゲーションに
+LiDARやIMUなどのセンサ，ホイールエンコーダから算出したオドメトリを利用している．
 
 これらのLiDARやオドメトリ，メトリックマップを基づくナビゲーション
 の他に，カメラ画像と深層学習に基づくナビゲーションが研究\cite{kendall2018learning}\cite{sauer2018conditional}されている．
@@ -31,11 +31,12 @@ LiDARやIMUなどのセンサ,ホイールエンコーダから算出したオ�
 岡田らの従来手法では，経路を追従する行動の獲得を目的としていた．
 そのため，走行する経路は一定という制限があり，任意の目的地に向けて移動することはできない．
 \figref{fig:nav_need}に示す目的地に向けて移動するためには，
-環境中の分岐路を検出し，分岐路で適切な進行方向の提示，
+環境中の分岐路を検出する機能，分岐路で適切な進行方向を提示する機能，
 動的に経路を選択して移動する機能が必要と考えられる．
 
 そこで，本論文では，岡田らの従来手法に対し，
-\figref{fig:haru_select}のような分岐路を視覚に基づいて検出し，目的地に向けた分岐路での進行方向の提示，
+\figref{fig:haru_select}のような分岐路を視覚に基づいて検出する機能，
+分岐路で目的地に向けた進行方向を提示する機能，
 動的に経路を選択して移動する機能を追加する．
 これにより，走行する経路を一定から，任意の目的地に向けた経路へ拡張することで，
 視覚に基づいて，経路を追従して目的地へ到達できる可能性がある．
@@ -86,14 +87,13 @@ LiDARやIMUなどのセンサ,ホイールエンコーダから算出したオ�
 \begin{figure}[htbp]
      \centering
       \includegraphics[width=90mm]{images/pdf/nav_need.pdf}
-      \caption{Path selection and following behavior based 
-      on camera images and target direction by imitation learning.}\label{fig:nav_need}
+      \caption{Autonomous mobility towards any destination}\label{fig:nav_need}
  \end{figure}
  \begin{figure}[htbp]
      \centering
       \includegraphics[width=90mm]{images/pdf/branch_path.pdf}
       \caption{Path selection and following behavior based 
-      on camera images and target direction by imitation learning.}\label{fig:haru_select}
+      on camera images and target direction by imitation learning}\label{fig:haru_select}
  \end{figure}
 % 春山らと藤原らの手法では，目標方向の
 % 作成方法は議論の対象としておらず，

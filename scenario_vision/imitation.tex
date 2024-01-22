@@ -1,11 +1,12 @@
 \section{経路追従モジュール}
 \label{sec:imitation}
 経路追従モジュールについて述べる．
-このモジュールは\ref{chap:path_select}章で述べたシステムに倣って構築した，
+このモジュールは\ref{chap:path_select}章で述べたシステムに倣って構築した
 カメラ画像に基づいて経路を追従するモジュールであり，
-分岐路では入力された目標方向によって経路を選択して走行する.
+分岐路では入力された目標方向に従って経路を選択して走行する.
 なお，\ref{chap:path_select}章で述べたシステムに対し，
-目標方向とネットワークのパラメータ変更，データセットの収集方法の追加をしている．
+目標方向とネットワークのパラメータの変更，およびデータセットの
+収集手法の追加を行なっている．
 
 % 次に追加した，データセットの収集方法について述べる．
 % \ref{chap:path_select}章では，学習器の訓練に60000stepを必要とし，
@@ -42,7 +43,7 @@
 %      \caption{Path-following module system}\label{fig:learning_sys}
 % \end{figure}
 
-追加した学習時のデータセットの収集方法は，
+追加したデータセットの収集手法は，
 % % 岡田ら\cite{okada2021}が提案した
 % % \begin{quote}
 % %     \begin{itemize}
@@ -51,14 +52,13 @@
 % %     \end{itemize}
 % %    \end{quote}
 % の他に
-藤原ら\cite{fujiwara2023}が学習量の削減を目的に行った以下の2つの手法である．
+学習量の削減を目的に藤原ら\cite{fujiwara2023}が行った以下の2つの手法である．
 \begin{quote}
     \begin{itemize}
      \item データセットに加えるデータの不均衡を改善する手法
      \item 学習時に積極的に蛇行する手法
     \end{itemize}
    \end{quote}
-
 
 データセットに加えるデータの不均衡を改善する手法について述べる．
 \figref{fig:oversmple}に，\chapref{chap:path_select}の実験における10000ステップあたりの目標方向
@@ -71,25 +71,26 @@ Haiboらの調査\cite{hukinko}では,ほとんどの標準的な学習アルゴ
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=100mm]{images/pdf/oversmple.pdf}
-     \caption{Number of data in the target direction per 10000 steps
-     in the previous experiment Quote from \cite{fujiwara2023}}\label{fig:oversmple}
+     \caption[Number of data in the target direction per 10000 steps
+     in the previous experiment]{Number of data in the target direction per 10000 steps
+     in the previous experiment（Quoted from \cite{fujiwara2023}）}\label{fig:oversmple}
 \end{figure}
 \clearpage
 次に，学習時に積極的に蛇行する手法について述べる．
-学習時に経路から離れた状態が増加すると,訓練済みの学習器での走行時に経路から
-外れることが減少し，より少ない学習時間で成功率が高いモデルができる可能性がある．
+学習時に経路から離れた状態が増加すると，訓練済みの学習器での走行時に経路から
+外れることが減少し，より少ない学習時間で成功率が高いモデルが獲得できる可能性がある．
 そのため，学習時に積極的に蛇行する手法では\figref{fig:dakou}に示すように，
 学習時のロボットの制御に用いるヨー方向の角速度を1.5倍にする．
-これにより，大きく蛇行して,目標経路から離れた状態を多く収集する．
+これにより，大きく蛇行して，目標経路から離れた状態を多く収集する．
 
-藤原らは実験により，これらの2つのデータセットの収集手法によって，
-経路追従の成功率を下げること無く，必要な学習量を60000ステップから
-20000ステップまで削減できることを確認している．
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=130mm]{images/pdf/dakou.pdf}
-     \caption{Aggressive meandering （Quote from \cite{fujiwara2023}）}\label{fig:dakou}
+     \caption[Aggressive meandering]{Aggressive meandering（Quoted from \cite{fujiwara2023}）}\label{fig:dakou}
 \end{figure}
+藤原らは実験により，これらの2つのデータセットの収集手法によって，
+経路追従の成功率を下げること無く，必要な学習量を60000ステップから
+20000ステップまで削減できることを確認している．
 \newpage
 
 \tabref{tab:target}に変更した目標方向とそのデータ形式を示す．
@@ -98,11 +99,11 @@ Haiboらの調査\cite{hukinko}では,ほとんどの標準的な学習アルゴ
 これに伴い，ワンショットベクトルの次元数を4から3へ変更している．
 さらに，目的地に到着後，ロボットを停止させることを目的として，
 Stop（停止）の目標方向を追加した．
-停止の目標方向が入力された際には，ロボットの並進速度は0.0m/sとなり，ロボットはその場で停止する．
+停止の目標方向が入力された際は，ロボットの並進速度は0.0m/sとなり，ロボットはその場で停止する．
 % なお，停止以外の目標方向における並進速度は\chapref{chap:path_select}と同様に0.2m/sである．
 % 「停止」が入力された場合は0.0m/sとなる．
 
-目標方向の次元数に伴い，変更を加えたネットワークの構造を\figref{fig:imi_net}に示す．
+目標方向の次元数の変更に伴い，修正を加えたネットワークの構造を\figref{fig:imi_net}に示す．
 具体的には，CNNの出力と目標方向を入力する全結合層の入力サイズを260から259へ調整している．
 
 \begin{table}[htbp]
@@ -127,7 +128,7 @@ Stop（停止）の目標方向を追加した．
 \begin{figure}[htbp]
     \centering
      \includegraphics[width=130mm]{images/pdf/imi_net.pdf}
-     \caption{Structure of the network of route selection module}
+     \caption{Structure of the network of path-following module}
      \label{fig:imi_net}
 \end{figure}
 
