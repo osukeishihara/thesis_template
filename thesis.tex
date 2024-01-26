@@ -8,19 +8,16 @@
 \usepackage{thesis}
 \usepackage{here}
 \usepackage{url}
-
+\usepackage[backend=biber,style=numeric, sorting=none]{biblatex} % biblatexを使用するためのパッケージ
+\addbibresource{main_bibliography.bib}
+\DeclareFieldFormat{journaltitle}{\textit{#1}}
+\renewbibmacro*{in:}{}
+% 著者名と論文タイトルの間を:に変更
+\DeclareDelimFormat[bib]{nametitledelim}{\addcolon\space}
+% タイトルを通常に
+% \DeclareFieldFormat{title}{\textit{#1}}
+\DeclareFieldFormat{title}{#1}
 \thesis{修 士 論 文}
-% \title{
-%   \centering
-%     % \scalebox{1.0}{視覚と行動のend-to-end学習により経路追従行動を}\\
-%     % \scalebox{1.0}{をオンラインで模倣する手法の提案}\\
-%     % \scalebox{1.0}{-経路選択機能の追加とシナリオに基づく}\\
-%     % \scalebox{1.0}{目的地へのナビゲーション-}\\
-%     視覚と行動の end-to-end 学習により経路追従行動をオンラインで模倣する手法の提案\\
-% -経路選択機能の追加とシナリオに基づく目的地へのナビゲーション-\\
-% A proposal for an online imitation method of path-tracking behavior by end-to-end learning of vision and action\\
-% -Adding route selection function and scenario-based navigation to the destination-\\
-% }
 \title{
   \centering
     \scalebox{0.7}{視覚と行動のend-to-end学習により}\\
@@ -39,7 +36,7 @@
 \setlength{\textwidth}{\fullwidth}
 \setlength{\evensidemargin}{\oddsidemargin}
 \vspace{-30.0zh}
-\date{2024年 3月}
+\date{2024年 2月}
 \vspace{-30.0zh}
 \teacher{林原 靖男 教授}
 \vspace{-30zh}
@@ -67,9 +64,12 @@
 % \include{experiment/main}
 \include{atend/end}
 %% Back Matter
-\backmatter{}
+% \backmatter{}
 %
+% \printbibliography
+\printbibliography[title=参考文献]
 \include{backmatter/main}
 %
+
 
 \end{document}
